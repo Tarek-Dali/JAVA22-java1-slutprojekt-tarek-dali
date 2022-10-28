@@ -17,16 +17,9 @@ import javax.swing.JTextField;
 
 class GUI {
 	/*
-	 * The code creates 7 JPanels using a loop and sets their layout and bounds.
-	 * Each JPanel is sent to a method called addComponents.
-	 * 
-	 * addComponents creates labels, textfield and buttons. The method also contains
-	 * code that gets LocalDate from DayDate class and uses them in
-	 * GUI.addComponents to set the labels from Monday to Sunday and sets correct
-	 * dates to them.
-	 * 
-	 * ActionListener listens on the Add event and Remove events buttons in order to
-	 * either add new labels or remove them.
+	 * This code creates a weekly calendar that begins from Monday and ends at Sunday.
+	 * All components and their content is created in addComponents method
+	 * addButtonListener listens on 2 buttons that either adds or remove newly created labels
 	 */
 
 	static JFrame frame = new JFrame("Weekly Calendar");
@@ -39,7 +32,7 @@ class GUI {
 		for (int i = 0; i < 7; i++) {
 			JPanel panel = new JPanel();
 			panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-			addComponents(panel);
+			addComponentsAndDate(panel);
 			frame.add(panel);
 		}
 
@@ -47,7 +40,7 @@ class GUI {
 
 	}
 
-	private static void addComponents(JPanel panel) {
+	private static void addComponentsAndDate(JPanel panel) {
 		JLabel addDay = new JLabel("");
 		JLabel addDate = new JLabel("");
 		JTextField addTextField = new JTextField("", 17);
@@ -57,7 +50,7 @@ class GUI {
 		panel.setBackground(Color.LIGHT_GRAY);
 
 		addDay.setText(DayDate.whenIsMonday.getDayOfWeek() + "");
-		addDate.setText(DayDate.whenIsMonday.getDayOfMonth() + " " + DayDate.date.getMonth());
+		addDate.setText(DayDate.date.getMonth() + " " + DayDate.whenIsMonday.getDayOfMonth());
 
 		if (DayDate.date.getDayOfMonth() == DayDate.whenIsMonday.getDayOfMonth()) {
 			addDay.setForeground(Color.RED);
