@@ -50,7 +50,7 @@ class GUI {
 		panel.setBackground(Color.LIGHT_GRAY);
 
 		addDay.setText(DayDate.whenIsMonday.getDayOfWeek() + "");
-		addDate.setText(DayDate.date.getMonth() + " " + DayDate.whenIsMonday.getDayOfMonth());
+		addDate.setText(DayDate.whenIsMonday.getMonth() + " " + DayDate.whenIsMonday.getDayOfMonth());
 
 		if (DayDate.date.getDayOfMonth() == DayDate.whenIsMonday.getDayOfMonth()) {
 			addDay.setForeground(Color.RED);
@@ -59,10 +59,7 @@ class GUI {
 		}
 
 		DayDate.whenIsMonday = DayDate.whenIsMonday.plusDays(1);
-
-		if (DayDate.whenIsMonday.getDayOfMonth() == 1) {
-			DayDate.date = DayDate.date.plusMonths(1);
-		}
+		
 
 		addDay.setAlignmentX(Component.CENTER_ALIGNMENT);
 		addDate.setAlignmentX(Component.CENTER_ALIGNMENT);
