@@ -18,8 +18,8 @@ import javax.swing.JTextField;
 class GUI {
 	/*
 	 * This code creates a weekly calendar that begins from Monday and ends at Sunday.
-	 * All components and their content is created in addComponents method
-	 * addButtonListener listens on 2 buttons that either adds or remove newly created labels
+	 * All components and their content is created in addComponents method.
+	 * addButtonListener listens on 2 buttons that either add or remove newly created labels.
 	 */
 
 	static JFrame frame = new JFrame("Weekly Calendar");
@@ -41,58 +41,58 @@ class GUI {
 	}
 
 	private static void addComponentsAndDate(JPanel panel) {
-		JLabel addDay = new JLabel("");
-		JLabel addDate = new JLabel("");
-		JTextField addTextField = new JTextField("", 17);
-		JButton addButton = new JButton("Add event");
-		JButton removeLabel = new JButton("Remove event");
+		JLabel labelDay = new JLabel("");
+		JLabel labelDate = new JLabel("");
+		JTextField textField = new JTextField("", 17);
+		JButton buttonAdd = new JButton("Add event");
+		JButton buttonRemove = new JButton("Remove event");
 
 		panel.setBackground(Color.LIGHT_GRAY);
 
-		addDay.setText(DayDate.whenIsMonday.getDayOfWeek() + "");
-		addDate.setText(DayDate.whenIsMonday.getMonth() + " " + DayDate.whenIsMonday.getDayOfMonth());
+		labelDay.setText(DayDate.whenIsMonday.getDayOfWeek() + "");
+		labelDate.setText(DayDate.whenIsMonday.getMonth() + " " + DayDate.whenIsMonday.getDayOfMonth());
 
-		if (DayDate.date.getDayOfMonth() == DayDate.whenIsMonday.getDayOfMonth()) {
-			addDay.setForeground(Color.RED);
-			addDate.setForeground(Color.RED);
+		if (DayDate.currentDate.getDayOfMonth() == DayDate.whenIsMonday.getDayOfMonth()) {
+			labelDay.setForeground(Color.RED);
+			labelDate.setForeground(Color.RED);
 			panel.setBackground(Color.YELLOW);
 		}
 
 		DayDate.whenIsMonday = DayDate.whenIsMonday.plusDays(1);
 		
 
-		addDay.setAlignmentX(Component.CENTER_ALIGNMENT);
-		addDate.setAlignmentX(Component.CENTER_ALIGNMENT);
-		addTextField.setAlignmentX(Component.CENTER_ALIGNMENT);
-		addButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-		removeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		labelDay.setAlignmentX(Component.CENTER_ALIGNMENT);
+		labelDate.setAlignmentX(Component.CENTER_ALIGNMENT);
+		textField.setAlignmentX(Component.CENTER_ALIGNMENT);
+		buttonAdd.setAlignmentX(Component.CENTER_ALIGNMENT);
+		buttonRemove.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-		addTextField.setPreferredSize(new Dimension(0, 50));
-		addButton.setPreferredSize(new Dimension(150, 20));
-		removeLabel.setPreferredSize(new Dimension(150, 20));
+		textField.setPreferredSize(new Dimension(0, 50));
+		buttonAdd.setPreferredSize(new Dimension(150, 20));
+		buttonRemove.setPreferredSize(new Dimension(150, 20));
 
-		addTextField.setMaximumSize(addTextField.getPreferredSize());
-		addButton.setMaximumSize(addButton.getPreferredSize());
-		removeLabel.setMaximumSize(removeLabel.getPreferredSize());
+		textField.setMaximumSize(textField.getPreferredSize());
+		buttonAdd.setMaximumSize(buttonAdd.getPreferredSize());
+		buttonRemove.setMaximumSize(buttonRemove.getPreferredSize());
 
-		addButton.setBackground(Color.ORANGE);
-		removeLabel.setBackground(Color.RED);
+		buttonAdd.setBackground(Color.ORANGE);
+		buttonRemove.setBackground(Color.RED);
 
-		addButtonListener(addButton, addTextField, panel, removeLabel);
+		addButtonListener(buttonAdd, buttonRemove, textField, panel);
 
 		panel.add(Box.createVerticalStrut(30));
-		panel.add(addDay);
-		panel.add(addDate);
+		panel.add(labelDay);
+		panel.add(labelDate);
 		panel.add(Box.createVerticalStrut(30));
-		panel.add(addTextField);
-		panel.add(addButton);
-		panel.add(removeLabel);
+		panel.add(textField);
+		panel.add(buttonAdd);
+		panel.add(buttonRemove);
 		panel.add(Box.createVerticalStrut(70));
 
 		frame.setVisible(true);
 	}
 
-	private static void addButtonListener(JButton b, JTextField tf, JPanel p, JButton rl) {
+	private static void addButtonListener(JButton b, JButton bRemove, JTextField tf, JPanel p) {
 		ActionListener bListener = new ActionListener() {
 			JLabel newLabel = new JLabel();
 			JLabel labelArray[] = new JLabel[10];
@@ -119,7 +119,7 @@ class GUI {
 					}
 					tf.setText("");
 
-				} else if (action == rl) {
+				} else if (action == bRemove) {
 					if (place > 0) {
 						b.setText("Add event");
 						place--;
@@ -135,6 +135,6 @@ class GUI {
 
 		};
 		b.addActionListener(bListener);
-		rl.addActionListener(bListener);
+		bRemove.addActionListener(bListener);
 	}
 }
